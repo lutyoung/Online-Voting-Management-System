@@ -27,5 +27,36 @@ namespace OnlineVotingSystem.Domain.Service
         {
             return _voterRepository.GetAll();
         }
+
+        public void DeleteVoter(int id)
+        {
+            _voterRepository.DeleteVoter(id);
+        }
+
+        public Voter GetVoter(int id)
+        {
+           return  _voterRepository.GetVoter(id);
+        }
+
+        public Voter GetDetails(int id)
+        {
+            return _voterRepository.GetDetails(id);
+        }
+
+        public Voter UpdateVoter(Voter voter)
+        {
+            return _voterRepository.UpdateVoter(voter);
+        }
+
+        public Voter Login(string email, string password)
+        {
+            
+            var voter = _voterRepository.FindByEmail(email);
+            if (voter == null || voter.Password != password)
+            {
+                return null;
+            }
+            return voter;
+        }
     }
 }

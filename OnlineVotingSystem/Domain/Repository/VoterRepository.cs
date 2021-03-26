@@ -32,5 +32,35 @@ namespace OnlineVotingSystem.Domain.Repository
         {
             return _votingContext.Voters.ToList();
         }
+
+        public void DeleteVoter(int id)
+        {
+            var voter = _votingContext.Voters.Find(id);
+            if (voter != null)
+            {
+                _votingContext.Voters.Remove(voter);
+                _votingContext.SaveChanges();
+            }
+        }
+
+        public Voter GetVoter(int id)
+        {
+            var voter = _votingContext.Voters.Where(v => v.Id == id).FirstOrDefault();
+            return voter;
+        }
+
+        public Voter GetDetails(int id)
+        {
+            var voter = _votingContext.Voters
+               .Where(v => v.Id == id).FirstOrDefault();
+            return voter;
+        }
+
+        public Voter UpdateVoter(Voter voter)
+        {
+            _votingContext.Voters.Update(voter);
+            _votingContext.SaveChanges();
+            return voter;
+        }
     }
 }

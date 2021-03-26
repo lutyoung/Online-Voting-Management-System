@@ -76,12 +76,17 @@ namespace OnlineVotingSystem.Controllers
                 var authenticationProperties = new AuthenticationProperties();
                 var principal = new ClaimsPrincipal(claimsIdentity);
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authenticationProperties);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(DashBoard));
             }
         }
-        
 
-        
+        public IActionResult DashBoard()
+        {
+            return View();
+        }
+
+
+
 
         [HttpGet]
         public IActionResult Edit(int? id)
@@ -117,9 +122,10 @@ namespace OnlineVotingSystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int? id)
+        public IActionResult Details()
         {
-            return View(_adminService.GetDetails(id.Value));
+
+            return View(_adminService.GetDetails(  int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value)));
         }
 
         [HttpGet]

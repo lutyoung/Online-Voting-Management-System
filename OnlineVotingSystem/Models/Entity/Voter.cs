@@ -21,9 +21,9 @@ namespace OnlineVotingSystem.Models.Entity
         [StringLength(160)]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "MiddleName is required")]
-        [DisplayName("MiddleName")]
-        [StringLength(160)]
+        //[Required(ErrorMessage = "MiddleName is required")]
+        //[DisplayName("MiddleName")]
+        //[StringLength(160)]
         public string MiddleName { get; set; }
 
         [Required]
@@ -34,7 +34,9 @@ namespace OnlineVotingSystem.Models.Entity
         public string Email { get; set; }
 
         [Required]
-        [DisplayName("Date Of Birth")]
+        //[MinimumAge(18)]
+        //[DisplayName("Date Of Birth")]
+        //[DataType(DataType.Date), DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
 
         [Required]

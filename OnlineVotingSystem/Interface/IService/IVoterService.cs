@@ -12,5 +12,16 @@ namespace OnlineVotingSystem.Interface.IService
 
         public List<Voter> GetAll();
 
+        public void DeleteVoter(int id);
+
+        public Voter GetVoter(int id);
+
+        public Voter GetDetails(int id);
+
+        public Voter UpdateVoter(Voter voter);
+
+        public Voter Login(string email, string password);
+
+
     }
 }
