@@ -44,15 +44,13 @@ namespace OnlineVotingSystem.Models.Entity
         [DisplayName("Phone Number")]
         public string PhoneNumber { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        [MinLength(8)]
-        [MaxLength(72)]
-        public string Password { get; set; }
 
         [Required]
         [DisplayName("Address")]
         public string Address { get; set; }
+
+ 
+
 
         public IList<Vote> Votes = new List<Vote>();
     }

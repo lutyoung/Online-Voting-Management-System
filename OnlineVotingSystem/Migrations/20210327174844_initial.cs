@@ -4,7 +4,7 @@ using MySql.Data.EntityFrameworkCore.Metadata;
 
 namespace OnlineVotingSystem.Migrations
 {
-    public partial class First_Migrate : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,8 +15,8 @@ namespace OnlineVotingSystem.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     PollingName = table.Column<string>(nullable: true),
-                    PollingType = table.Column<string>(nullable: true),
-                    pollingDescription = table.Column<string>(nullable: true)
+                    PollingDate = table.Column<DateTime>(nullable: false),
+                    PollingDescription = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -24,7 +24,7 @@ namespace OnlineVotingSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -41,7 +41,7 @@ namespace OnlineVotingSystem.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,15 +63,15 @@ namespace OnlineVotingSystem.Migrations
                 {
                     table.PrimaryKey("PK_Admins", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Admins_Users_UserId",
+                        name: "FK_Admins_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Candidates",
+                name: "Voters",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -79,7 +79,7 @@ namespace OnlineVotingSystem.Migrations
                     UserId = table.Column<int>(nullable: true),
                     FirstName = table.Column<string>(maxLength: 160, nullable: false),
                     LastName = table.Column<string>(maxLength: 160, nullable: false),
-                    MiddleName = table.Column<string>(maxLength: 160, nullable: false),
+                    MiddleName = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: false),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
                     Gender = table.Column<string>(nullable: false),
@@ -89,11 +89,11 @@ namespace OnlineVotingSystem.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Candidates", x => x.Id);
+                    table.PrimaryKey("PK_Voters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Candidates_Users_UserId",
+                        name: "FK_Voters_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -114,15 +114,9 @@ namespace OnlineVotingSystem.Migrations
                 {
                     table.PrimaryKey("PK_Registers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Registers_Candidates_CandidateId",
-                        column: x => x.CandidateId,
-                        principalTable: "Candidates",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Registers_Users_UserId",
+                        name: "FK_Registers_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -141,12 +135,6 @@ namespace OnlineVotingSystem.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Results", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Results_Candidates_CandidateId",
-                        column: x => x.CandidateId,
-                        principalTable: "Candidates",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -157,25 +145,51 @@ namespace OnlineVotingSystem.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(nullable: false),
                     CandidateId = table.Column<int>(nullable: false),
-                    VoteDate = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<int>(nullable: false),
-                    VoteDiscription = table.Column<string>(nullable: true)
+                    VoteDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Votes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Votes_Candidates_CandidateId",
-                        column: x => x.CandidateId,
-                        principalTable: "Candidates",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Votes_Users_UserId",
+                        name: "FK_Votes_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Candidates",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(maxLength: 160, nullable: false),
+                    LastName = table.Column<string>(maxLength: 160, nullable: false),
+                    MiddleName = table.Column<string>(maxLength: 160, nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    Gender = table.Column<string>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: false),
+                    Address = table.Column<string>(nullable: false),
+                    PollingId = table.Column<int>(nullable: true),
+                    VoteId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Candidates", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Candidates_Pollings_PollingId",
+                        column: x => x.PollingId,
+                        principalTable: "Pollings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Candidates_Votes_VoteId",
+                        column: x => x.VoteId,
+                        principalTable: "Votes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -184,9 +198,14 @@ namespace OnlineVotingSystem.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Candidates_UserId",
+                name: "IX_Candidates_PollingId",
                 table: "Candidates",
-                column: "UserId");
+                column: "PollingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Candidates_VoteId",
+                table: "Candidates",
+                column: "VoteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Registers_CandidateId",
@@ -204,6 +223,11 @@ namespace OnlineVotingSystem.Migrations
                 column: "CandidateId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Voters_UserId",
+                table: "Voters",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Votes_CandidateId",
                 table: "Votes",
                 column: "CandidateId");
@@ -212,15 +236,48 @@ namespace OnlineVotingSystem.Migrations
                 name: "IX_Votes_UserId",
                 table: "Votes",
                 column: "UserId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Registers_Candidates_CandidateId",
+                table: "Registers",
+                column: "CandidateId",
+                principalTable: "Candidates",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Results_Candidates_CandidateId",
+                table: "Results",
+                column: "CandidateId",
+                principalTable: "Candidates",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Votes_Candidates_CandidateId",
+                table: "Votes",
+                column: "CandidateId",
+                principalTable: "Candidates",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Admins");
+            migrationBuilder.DropForeignKey(
+                name: "FK_Votes_User_UserId",
+                table: "Votes");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Candidates_Pollings_PollingId",
+                table: "Candidates");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Candidates_Votes_VoteId",
+                table: "Candidates");
 
             migrationBuilder.DropTable(
-                name: "Pollings");
+                name: "Admins");
 
             migrationBuilder.DropTable(
                 name: "Registers");
@@ -229,13 +286,19 @@ namespace OnlineVotingSystem.Migrations
                 name: "Results");
 
             migrationBuilder.DropTable(
+                name: "Voters");
+
+            migrationBuilder.DropTable(
+                name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Pollings");
+
+            migrationBuilder.DropTable(
                 name: "Votes");
 
             migrationBuilder.DropTable(
                 name: "Candidates");
-
-            migrationBuilder.DropTable(
-                name: "Users");
         }
     }
 }

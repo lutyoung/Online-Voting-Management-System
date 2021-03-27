@@ -9,8 +9,8 @@ using OnlineVotingSystem.Models;
 namespace OnlineVotingSystem.Migrations
 {
     [DbContext(typeof(VotingContext))]
-    [Migration("20210323185252_First_Migrate")]
-    partial class First_Migrate
+    [Migration("20210327174844_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,21 +101,21 @@ namespace OnlineVotingSystem.Migrations
                         .HasColumnType("varchar(160)")
                         .HasMaxLength(160);
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("varchar(72)")
-                        .HasMaxLength(72);
-
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int?>("PollingId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VoteId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("PollingId");
+
+                    b.HasIndex("VoteId");
 
                     b.ToTable("Candidates");
                 });
@@ -126,13 +126,13 @@ namespace OnlineVotingSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("PollingDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("PollingDescription")
+                        .HasColumnType("text");
+
                     b.Property<string>("PollingName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PollingType")
-                        .HasColumnType("text");
-
-                    b.Property<string>("pollingDescription")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -241,7 +241,7 @@ namespace OnlineVotingSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("OnlineVotingSystem.Models.Entity.Vote", b =>
@@ -253,17 +253,11 @@ namespace OnlineVotingSystem.Migrations
                     b.Property<int>("CandidateId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Name")
-                        .HasColumnType("int");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("VoteDate")
                         .HasColumnType("datetime");
-
-                    b.Property<string>("VoteDiscription")
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -272,6 +266,59 @@ namespace OnlineVotingSystem.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Votes");
+                });
+
+            modelBuilder.Entity("OnlineVotingSystem.Models.Entity.Voter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("varchar(160)")
+                        .HasMaxLength(160);
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("varchar(160)")
+                        .HasMaxLength(160);
+
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("varchar(72)")
+                        .HasMaxLength(72);
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Voters");
                 });
 
             modelBuilder.Entity("OnlineVotingSystem.Models.Entity.Admin", b =>
@@ -283,9 +330,13 @@ namespace OnlineVotingSystem.Migrations
 
             modelBuilder.Entity("OnlineVotingSystem.Models.Entity.Candidate", b =>
                 {
-                    b.HasOne("OnlineVotingSystem.Models.Entity.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.HasOne("OnlineVotingSystem.Models.Entity.Polling", null)
+                        .WithMany("Candidates")
+                        .HasForeignKey("PollingId");
+
+                    b.HasOne("OnlineVotingSystem.Models.Entity.Vote", null)
+                        .WithMany("Candidates")
+                        .HasForeignKey("VoteId");
                 });
 
             modelBuilder.Entity("OnlineVotingSystem.Models.Entity.Register", b =>
@@ -325,6 +376,13 @@ namespace OnlineVotingSystem.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("OnlineVotingSystem.Models.Entity.Voter", b =>
+                {
+                    b.HasOne("OnlineVotingSystem.Models.Entity.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

@@ -7,6 +7,10 @@ namespace OnlineVotingSystem.Models.Entity
 {
     public class Vote : BaseEntity
     {
+        public Vote()
+        {
+            Candidates = new List<Candidate>();
+        }
         public int UserId { get; set; }
 
         public User User { get; set; }
@@ -16,17 +20,7 @@ namespace OnlineVotingSystem.Models.Entity
         public Candidate Candidate { get; set; }
 
         public DateTime VoteDate { get; set; }
-
-        public enum VoteType
-        {
-            National,
-            State,
-            Local
-        }
-
-        public VoteType Name { get;set; }
-
-        public string VoteDiscription { get; set; }
-
+        
+        public IList<Candidate> Candidates { get; set; }
     }
 }

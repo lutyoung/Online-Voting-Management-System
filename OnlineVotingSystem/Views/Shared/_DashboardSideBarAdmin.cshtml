@@ -3,25 +3,48 @@
 
 <nav id="sidebar">
     <div class="p-4 pt-5">
-        <a href="#" class="img logo rounded-circle mb-5" style="background-image: url(../../wwwroot/images/logo.jpg);"></a>
+
+        <a href="#" class="img logo rounded-circle mb-5" style="background-image: url(images/logo.jpg);"></a>
         <ul class="list-unstyled components mb-5">
             <li class="active">
                 <a class="nav-link" asp-controller="Admin" asp-action="DashBoard">Home</a>
             </li>
-            <li>
-                <a class="nav-link" asp-controller="Admin" asp-action="Details"> Details</a>
+            <li class="active">
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Admin</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a class="nav-link text-light" asp-controller="Admin" asp-action="Index">List Of Admins</a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-light" asp-controller="Admin" asp-action="Create"> Add Admin</a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="Details">Details</a>
+                    </li>
+                </ul>
             </li>
             <li>
-                <a asp-action="">Register Candidate</a>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Candidate</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a class="nav-link text-light" asp-controller="Candidate" asp-action="Register"> Add Candidate</a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-light" asp-controller="Candidate" asp-action="">List Of Candidates</a>
+                    </li>
+                </ul>
             </li>
             <li>
-                <a class="nav-link" asp-controller="Voter" asp-action="Register"> Register Voter</a>
-            </li>
-            <li>
-                <a class="nav-link" asp-controller="Voter" asp-action="Index">List Of Voters</a>
+                <a href="#pagemenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Voter</a>
+                <ul class="collapse list-unstyled" id="pagemenu">
+                    <li>
+                        <a class="nav-link text-light" asp-controller="Voter" asp-action="Register"> Add Voter</a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-light" asp-controller="Voter" asp-action="Index">List Of Voters</a>
+                    </li>
+                </ul>
             </li>
         </ul>
-
-
     </div>
 </nav>

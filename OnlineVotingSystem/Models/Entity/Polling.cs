@@ -7,10 +7,15 @@ namespace OnlineVotingSystem.Models.Entity
 {
     public class Polling : BaseEntity
     {
+     
         public string PollingName { get; set; }
 
-        public string PollingType { get; set; }
+        public DateTime PollingDate { get; set; }
 
-        public string pollingDescription { get; set; }
+        public string PollingDescription { get; set; }
+
+        public IList<Vote> Votes = new List<Vote>();
+
+        public IList<Candidate> Candidates { get; set; } = new List<Candidate>();
     }
 }
