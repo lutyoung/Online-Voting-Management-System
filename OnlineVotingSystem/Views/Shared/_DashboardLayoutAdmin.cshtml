@@ -1,5 +1,4 @@
-﻿
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <title>DashBoard</title>
@@ -14,6 +13,7 @@
 <body>
 
     <div class="wrapper d-flex align-items-stretch">
+
         <partial name="_DashboardSideBarAdmin" />
 
         <!-- Page Content  -->
@@ -21,7 +21,7 @@
 
             <partial name="_DashboardTopBarAdmin" />
 
-            <h2 class="mb-4">@ViewData["pageTitle"]</h2>
+            <h4 class="mb-4">@ViewData["pageTitle"]</h4>
 
             @RenderBody()
 

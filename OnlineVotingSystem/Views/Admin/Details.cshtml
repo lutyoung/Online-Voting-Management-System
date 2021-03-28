@@ -1,16 +1,11 @@
 ﻿@model OnlineVotingSystem.Models.Entity.Admin
 
 @{
-    Layout = "_DashboardSideBarAdmin";
-    ViewData["pageTitle"] = "Details";
+    Layout = "_DashboardLayoutAdmin";
+    ViewData["pageTitle"] = "Admin Details";
 }
 
-<h1>Details</h1>
-
-<h3>Admin Details</h3>
 <div>
-    <h4>AccountHolder</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FirstName)
@@ -41,8 +36,4 @@
     <a asp-action="Index" asp-controller="Admin">Back to List</a>
 
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
 

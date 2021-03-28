@@ -125,7 +125,7 @@ namespace OnlineVotingSystem.Controllers
         public IActionResult Details()
         {
 
-            return View(_adminService.GetDetails(  int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value)));
+            return View(_adminService.GetDetails(int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value)));
         }
 
         [HttpGet]
