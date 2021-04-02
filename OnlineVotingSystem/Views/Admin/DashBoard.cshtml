@@ -1,8 +1,15 @@
 ﻿@model OnlineVotingSystem.Models.Entity.Admin
+@using System.Security.Claims;
+
 @{
     Layout = "_DashBoardLayoutAdmin";
 }
 
 <h2>@ViewData["Title"]</h2>
 
-@*<h1>Welcome @Model.FirstName</h1>*@
+<h3>Welcome To Admin Dashboard @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName).Value</h3>
+
+
+<li>
+    <a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="Details">Details</a>
+</li>

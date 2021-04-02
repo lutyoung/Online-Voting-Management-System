@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +10,11 @@ namespace OnlineVotingSystem.Models.Entity
 {
     public class Voter : BaseEntity
     {
-        public User User { get; set; }
+        //[Key]
+       // [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
+       
+        public string CardNumber { get; set; }
 
         [Required(ErrorMessage = "FirstName is required")]
         [DisplayName("FirstName")]
@@ -34,9 +39,9 @@ namespace OnlineVotingSystem.Models.Entity
         public string Email { get; set; }
 
         [Required]
-        //[MinimumAge(18)]
-        //[DisplayName("Date Of Birth")]
-        //[DataType(DataType.Date), DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [MinimumAge(18)]
+        [DisplayName("Date Of Birth")]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
 
         [Required]
@@ -55,8 +60,6 @@ namespace OnlineVotingSystem.Models.Entity
 
         [Required]
         [DisplayName("Address")]
-        public string Address { get; set; }
-
-        public IList<Vote> Votes = new List<Vote>(); 
+        public string Address { get; set; } 
     }
 }

@@ -12,5 +12,7 @@ namespace OnlineVotingSystem.Interface.IRepository
 
         public List<Candidate> GetAll();
 
+        public Candidate GetCandidateByEmail(string email);
+
     }
 }

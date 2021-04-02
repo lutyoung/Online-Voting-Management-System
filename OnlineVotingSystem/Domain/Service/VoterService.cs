@@ -33,14 +33,14 @@ namespace OnlineVotingSystem.Domain.Service
             _voterRepository.DeleteVoter(id);
         }
 
-        public Voter GetVoter(int id)
+        public Voter GetVoterByCardNumber(string cardNumber)
         {
-           return  _voterRepository.GetVoter(id);
+           return  _voterRepository.GetVoterByCardNumber(cardNumber);
         }
 
-        public Voter GetDetails(int id)
+        public Voter GetVoter(int id)
         {
-            return _voterRepository.GetDetails(id);
+            return _voterRepository.GetVoter(id);
         }
 
         public Voter UpdateVoter(Voter voter)

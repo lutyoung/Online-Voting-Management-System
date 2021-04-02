@@ -1,0 +1,45 @@
+﻿@model OnlineVotingSystem.Models.Entity.Poll
+
+@{
+    Layout = "_DashboardLayoutAdmin";
+    ViewData["Title"] = "Create Poll";
+}
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="PollName" class="control-label"></label>
+                    <input asp-for="PollName" class="form-control" />
+                    <span asp-validation-for="PollName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label asp-for="PollDate" class="control-label"></label>
+                    <input asp-for="PollDate" class="form-control" type="date"/>
+                    <span asp-validation-for="PollDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="PollDescription"  class="control-label"></label>
+                    <textarea asp-for="PollDescription" class="form-control"></textarea>
+                    <span asp-validation-for="PollDescription" class="text-danger"></span>
+                </div>
+            </div>
+
+           
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

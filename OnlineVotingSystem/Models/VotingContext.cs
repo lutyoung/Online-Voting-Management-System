@@ -20,9 +20,7 @@ namespace OnlineVotingSystem.Models
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<Voter> Voters { get; set; }
-        public DbSet<Polling> Pollings { get; set; }
-        public DbSet<Register> Registers { get; set; }
-        public DbSet<Result> Results { get; set; }
+        public DbSet<Poll> Polls { get; set; }
         public DbSet<Vote> Votes { get; set; }
 
     }

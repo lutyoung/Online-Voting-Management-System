@@ -1,0 +1,64 @@
+﻿@model IEnumerable<OnlineVotingSystem.Models.Entity.Candidate>
+
+@{
+    Layout = "_DashboardLayoutAdmin";
+    ViewData["pageTitle"] = "Index";
+}
+
+@if(ViewBag.candidates.Count == 0)
+{
+    <p>No Exsisting Candidate</p>
+}
+<p>
+    <a asp-action="Register">Register New Voter</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name 
+            </th>
+            <th>
+               Middle Name 
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Poll Name
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var candidate in ViewBag.candidates)
+        {
+        <tr>
+            <td>
+                @candidate.FirstName
+            </td>
+            <td>
+                @candidate.LastName
+            </td>
+            <td>
+                @candidate.MiddleName
+            </td>
+            <td>
+                @candidate.Email
+            </td>
+            <td>
+                @candidate.PollId
+            </td>
+
+            <td>
+                <a asp-action="Details" asp-route-id="@candidate.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@candidate.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

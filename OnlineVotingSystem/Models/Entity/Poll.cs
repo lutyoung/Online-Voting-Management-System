@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace OnlineVotingSystem.Models.Entity
 {
-    public class Polling : BaseEntity
+    public class Poll : BaseEntity
     {
      
-        public string PollingName { get; set; }
+        public string PollName { get; set; }
 
-        public DateTime PollingDate { get; set; }
+        public DateTime PollDate { get; set; }
 
-        public string PollingDescription { get; set; }
+        public string PollDescription { get; set; }
 
-        public IList<Vote> Votes = new List<Vote>();
+        public IList<Vote> Votes { get; set;} = new List<Vote>();
 
         public IList<Candidate> Candidates { get; set; } = new List<Candidate>();
     }

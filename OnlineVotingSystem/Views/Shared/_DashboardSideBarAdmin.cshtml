@@ -18,8 +18,16 @@
                     <li>
                         <a class="nav-link text-light" asp-controller="Admin" asp-action="Create"> Add Admin</a>
                     </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Poll</a>
+                <ul class="collapse list-unstyled" id="Submenu">
                     <li>
-                        <a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="Details">Details</a>
+                        <a class="nav-link text-light" asp-controller="Poll" asp-action="Create"> Add Poll</a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-light" asp-controller="Poll" asp-action="">List Of Polls</a>
                     </li>
                 </ul>
             </li>
@@ -30,7 +38,7 @@
                         <a class="nav-link text-light" asp-controller="Candidate" asp-action="Register"> Add Candidate</a>
                     </li>
                     <li>
-                        <a class="nav-link text-light" asp-controller="Candidate" asp-action="">List Of Candidates</a>
+                        <a class="nav-link text-light" asp-controller="Candidate" asp-action="Index">List Of Candidates</a>
                     </li>
                 </ul>
             </li>

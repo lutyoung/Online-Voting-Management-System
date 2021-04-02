@@ -60,9 +60,13 @@ C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netco
 C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Edit.cshtml.g.cs
 C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Index.cshtml.g.cs
 C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\Razor\Views\Admin\LogIn.cshtml.g.cs
+C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\Razor\Views\Candidate\Index.cshtml.g.cs
 C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\Razor\Views\Candidate\Register.cshtml.g.cs
 C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
+C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\Razor\Views\Poll\Create.cshtml.g.cs
+C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\Razor\Views\Poll\Delete.cshtml.g.cs
+C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\Razor\Views\Poll\Index.cshtml.g.cs
 C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_DashboardLayoutAdmin.cshtml.g.cs
 C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_DashboardLayoutVoter.cshtml.g.cs
@@ -87,4 +91,3 @@ C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netco
 C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\OnlineVotingSystem.dll
 C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\OnlineVotingSystem.pdb
 C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\OnlineVotingSystem.genruntimeconfig.cache
-C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\OnlineVotingSystem.csprojAssemblyReference.cache

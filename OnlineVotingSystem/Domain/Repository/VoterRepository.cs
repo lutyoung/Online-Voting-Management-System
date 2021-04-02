@@ -28,6 +28,11 @@ namespace OnlineVotingSystem.Domain.Repository
             return _votingContext.Voters.FirstOrDefault(a => a.Email == email);
         }
 
+        public Voter GetVoterByCardNumber(string cardNumber)
+        {
+            return _votingContext.Voters.FirstOrDefault(a => a.CardNumber == cardNumber);
+        }
+
         public List<Voter> GetAll()
         {
             return _votingContext.Voters.ToList();
@@ -45,16 +50,10 @@ namespace OnlineVotingSystem.Domain.Repository
 
         public Voter GetVoter(int id)
         {
-            var voter = _votingContext.Voters.Where(v => v.Id == id).FirstOrDefault();
+            var voter = _votingContext.Voters.FirstOrDefault(v => v.Id == id);
             return voter;
         }
 
-        public Voter GetDetails(int id)
-        {
-            var voter = _votingContext.Voters
-               .Where(v => v.Id == id).FirstOrDefault();
-            return voter;
-        }
 
         public Voter UpdateVoter(Voter voter)
         {

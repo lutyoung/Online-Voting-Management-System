@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineVotingSystem.Interface.IService;
+using OnlineVotingSystem.Models;
 using OnlineVotingSystem.Models.Entity;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace OnlineVotingSystem.Controllers
     {
         private readonly IAdminService _adminService;
 
-        public AdminController(IAdminService adminService)
+        public AdminController( IAdminService adminService)
         {
             _adminService = adminService;
         }
@@ -24,7 +25,8 @@ namespace OnlineVotingSystem.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_adminService.GetAll());
+            ViewBag.admins = _adminService.GetAll();
+            return View();
         }
 
         [HttpGet]
@@ -124,8 +126,8 @@ namespace OnlineVotingSystem.Controllers
         [HttpGet]
         public IActionResult Details()
         {
-
-            return View(_adminService.GetDetails(int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value)));
+            ViewBag.admins = _adminService.GetDetails(int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value));
+            return View();
         }
 
         [HttpGet]

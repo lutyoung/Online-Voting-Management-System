@@ -27,5 +27,10 @@ namespace OnlineVotingSystem.Domain.Repository
         {
             return _votingContext.Candidates.ToList();
         }
+
+        public Candidate GetCandidateByEmail(string email)
+        {
+            return _votingContext.Candidates.SingleOrDefault(c => c.Email == email);
+        }
     }
 }

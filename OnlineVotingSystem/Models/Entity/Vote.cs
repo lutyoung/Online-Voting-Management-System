@@ -7,20 +7,16 @@ namespace OnlineVotingSystem.Models.Entity
 {
     public class Vote : BaseEntity
     {
-        public Vote()
-        {
-            Candidates = new List<Candidate>();
-        }
-        public int UserId { get; set; }
+        public int VoterId { get; set; }
 
-        public User User { get; set; }
+        public Voter Voter { get; set; }
 
         public int CandidateId { get; set; }
 
         public Candidate Candidate { get; set; }
 
-        public DateTime VoteDate { get; set; }
-        
-        public IList<Candidate> Candidates { get; set; }
+        public int PollId { get; set; }
+
+        public Poll Poll { get; set; }
     }
 }

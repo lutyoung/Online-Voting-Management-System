@@ -45,6 +45,8 @@ namespace OnlineVotingSystem
             services.AddScoped<IVoterService, VoterService>();
             services.AddScoped<ICandidateRepository, CandidateRepository>();
             services.AddScoped<ICandidateService, CandidateService>();
+            services.AddScoped<IPollRepository, PollRepository>();
+            services.AddScoped<IPollService, PollService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

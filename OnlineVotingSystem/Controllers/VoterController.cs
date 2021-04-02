@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineVotingSystem.Interface.IService;
 using OnlineVotingSystem.Models.Entity;
+using OnlineVotingSystem.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,9 @@ namespace OnlineVotingSystem.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_voterService.GetAll());
+            ViewBag.voters = _voterService.GetAll();
+            return View();
+            
         }
 
         [HttpGet]
@@ -34,13 +37,10 @@ namespace OnlineVotingSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(Voter voter)
+        public IActionResult Register( Voter voter)
         {
-            if (ModelState.IsValid)
-            {
-                _voterService.AddVoter(voter);
-            }
-            return View(voter);
+            var voters = _voterService.AddVoter(voter);
+            return View(voters);
         }
 
         [HttpGet]
@@ -68,9 +68,9 @@ namespace OnlineVotingSystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int? id)
+        public IActionResult GetVoterByCardNumber(string cardNumber)
         {
-            return View(_voterService.GetDetails(id.Value));
+            return View(_voterService.GetVoterByCardNumber(cardNumber));
         }
 
         [HttpGet]
@@ -80,7 +80,7 @@ namespace OnlineVotingSystem.Controllers
             {
                 return NotFound();
             }
-
+            
             var voter = _voterService.GetVoter(id.Value);
             if (voter == null)
             {
@@ -117,29 +117,30 @@ namespace OnlineVotingSystem.Controllers
         [AllowAnonymous]
         public IActionResult Login(string email, string password)
         {
-
-            var voter = _voterService.Login(email, password);
-            if (voter == null)
-            {
-                ViewBag.Message = "Invalid email/Password";
-                return RedirectToAction("Login", "Voter");
-            }
-            else
-            {
-                var claims = new List<Claim>
+                var voter = _voterService.Login(email, password);
+                if (voter == null)
                 {
+                    ViewBag.Message = "Invalid email/Password";
+                    return RedirectToAction("Login", "Voter");
+                }
+                else
+                {
+                    var claims = new List<Claim>
+                    {
                     new Claim(ClaimTypes.Name, $"{voter.FirstName}"),
                     new Claim(ClaimTypes.GivenName, $"{voter.FirstName} {voter.LastName}"),
-                    new Claim(ClaimTypes.NameIdentifier, voter.Id.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, voter.CardNumber.ToString()),
                     new Claim(ClaimTypes.Email, voter.Email),
                     new Claim(ClaimTypes.Role, "Voter"),
-                };
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var authenticationProperties = new AuthenticationProperties();
-                var principal = new ClaimsPrincipal(claimsIdentity);
-                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authenticationProperties);
-                return RedirectToAction(nameof(DashBoard));
-            }
+                    };
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var authenticationProperties = new AuthenticationProperties();
+                    var principal = new ClaimsPrincipal(claimsIdentity);
+                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authenticationProperties);
+                    return RedirectToAction(nameof(DashBoard));
+                }
+            
+            
         }
 
         public IActionResult DashBoard()

@@ -2,7 +2,12 @@
 
 @{
     Layout = "_DashboardLayoutAdmin";
-    ViewData["pageTitle"] = "LIST OF ADMINS";
+    ViewData["pageTitle"] = "Index";
+}
+
+@if(ViewBag.admins.Count == 0)
+{
+    <p>No Admin yet</p>
 }
 
 <table class="table">
@@ -32,32 +37,32 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var admin in ViewBag.admins)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
+                    @(admin.FirstName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
+                    @(admin.LastName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MiddleName)
+                    @(admin.MiddleName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Email)
+                    @(admin.Email)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    @(admin.PhoneNumber)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Address)
+                    @(admin.Address)
                 </td>
 
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@admin.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@admin.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@admin.Id">Delete</a>
                 </td>
             </tr>
         }

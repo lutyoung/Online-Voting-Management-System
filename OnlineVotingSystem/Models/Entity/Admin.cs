@@ -9,7 +9,6 @@ namespace OnlineVotingSystem.Models.Entity
 {
     public class Admin : BaseEntity
     {
-        public User User { get; set; }
 
         [Required(ErrorMessage = "Firstname is required")]
         [DisplayName("Firstname")]

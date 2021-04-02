@@ -16,7 +16,7 @@ namespace OnlineVotingSystem.Interface.IService
 
         public Voter GetVoter(int id);
 
-        public Voter GetDetails(int id);
+        public Voter GetVoterByCardNumber(string cardNumber);
 
         public Voter UpdateVoter(Voter voter);
 

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<OnlineVotingSystem.Models.Entity.Poll>
+
+@{
+    Layout = "_DashboardLayoutAdmin";
+    ViewData["pageTitle"] = "Index";
+}
+
+@if(ViewBag.polls.Count == 0)
+{
+    <p>No Exsisting Poll</p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Poll Name
+            </th>
+            <th>
+                Poll Date 
+            </th>
+            <th>
+               Poll Description
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var poll in ViewBag.polls)
+        {
+<tr>
+    <td>
+        @poll.PollName
+    </td>
+    <td>
+        @poll.PollDate.ToLongDateString()
+    </td>
+    <td>
+        @poll.PollDescription
+    </td>
+    <td>
+        <a asp-action="Details" asp-route-id="@poll.Id">Details</a> |
+        <a asp-action="Delete" asp-route-id="@poll.Id">Delete</a>
+    </td>
+</tr>
+}
+    </tbody>
+</table>
