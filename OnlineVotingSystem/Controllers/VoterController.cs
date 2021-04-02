@@ -39,8 +39,8 @@ namespace OnlineVotingSystem.Controllers
         [HttpPost]
         public IActionResult Register( Voter voter)
         {
-            var voters = _voterService.AddVoter(voter);
-            return View(voters);
+            ViewBag.voters = _voterService.AddVoter(voter);
+            return View();
         }
 
         [HttpGet]
@@ -62,7 +62,7 @@ namespace OnlineVotingSystem.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            _voterService.DeleteVoter(id);
+            ViewBag.voters.DeleteVoter(id);
 
             return RedirectToAction(nameof(Index));
         }
@@ -117,6 +117,8 @@ namespace OnlineVotingSystem.Controllers
         [AllowAnonymous]
         public IActionResult Login(string email, string password)
         {
+            try
+            {
                 var voter = _voterService.Login(email, password);
                 if (voter == null)
                 {
@@ -139,7 +141,11 @@ namespace OnlineVotingSystem.Controllers
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authenticationProperties);
                     return RedirectToAction(nameof(DashBoard));
                 }
-            
+            }
+            catch(Exception e)
+            {
+                return View(e);
+            }
             
         }
 

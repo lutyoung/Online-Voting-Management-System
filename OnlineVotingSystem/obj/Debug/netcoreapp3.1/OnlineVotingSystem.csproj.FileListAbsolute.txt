@@ -91,3 +91,4 @@ C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netco
 C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\OnlineVotingSystem.dll
 C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\OnlineVotingSystem.pdb
 C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\OnlineVotingSystem.genruntimeconfig.cache
+C:\Users\user\source\repos\OnlineVotingSystem\OnlineVotingSystem\obj\Debug\netcoreapp3.1\OnlineVotingSystem.csprojAssemblyReference.cache
